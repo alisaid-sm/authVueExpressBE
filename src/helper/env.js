@@ -8,5 +8,6 @@ module.exports = {
     PORT: process.env.PORT,
     EMAIL: process.env.EMAIL,
     PASSWORD_EMAIL: process.env.PASSWORD_EMAIL,
-    PORTFE: process.env.PORTFE
+    URLFE: process.env.URLFE,
+    URLBE: process.env.URLBE
 };

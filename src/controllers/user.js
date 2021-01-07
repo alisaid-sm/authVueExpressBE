@@ -2,7 +2,7 @@ const usersModels = require('../models/user');
 const { success, failed, successToken } = require('../helper/response');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { privateKey, DB_HOST, PORT, PORTFE } = require('../helper/env');
+const { privateKey , URLFE, URLBE } = require('../helper/env');
 const nodemailer = require('nodemailer');
 const env = require('../helper/env');
 
@@ -23,7 +23,7 @@ const users = {
                     const output = `
                     <center><h3>Hello ${data.email}</h3>
                     <h3>Thank you for registration</h3>
-                    <p>You can confirm your email by clicking the link below <br> <a href="http://${DB_HOST}:${PORT}/api/v1/user/active/${token}">Activation</a></p></center>
+                    <p>You can confirm your email by clicking the link below <br> <a href="http://${URLBE}/api/v1/user/active/${token}">Activation</a></p></center>
                     `;
                     let transporter = nodemailer.createTransport({
                         host: 'smtp.gmail.com',
@@ -69,7 +69,7 @@ const users = {
                     const data = jwt.decode(token);
                     const email = data.email;
                     usersModels.updateUser(email).then(() => {
-                        res.render('index', { email, link: `http://${DB_HOST}:${PORTFE}` });
+                        res.render('index', { email, link: `http://${URLFE}` });
                     }).catch(err => {
                         failed(res, [], err.message);
                     });
@@ -148,7 +148,7 @@ const users = {
         const output = `
         <center><h3>Hello ${email}</h3>
         <h3>Thank you for registration</h3>
-        <p>You can confirm your email by clicking the link below <br> <a href="http://${DB_HOST}:${PORT}/api/v1/user/active/${token}">Activation</a></p></center>
+        <p>You can confirm your email by clicking the link below <br> <a href="http://${URLBE}/api/v1/user/active/${token}">Activation</a></p></center>
         `;
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
